@@ -6,9 +6,9 @@ With this tool, you:
 
 - Write plain english scenario files that describe what you want to test in VS Code and the screenshots you want to capture. For example: "Capture the suggest widget in a TypeScript file"
 
-- `generate`. Uses Claude to generate Playwright scripts that run each scenario. This only needs to be run when a scenario is added or changed.
+- `generate`: Uses Claude to generate Playwright scripts that run each scenario. This only needs to be run when a scenario is added or changed.
 
-- `run`. Executes the Playwright scripts and output the screenshots. This does not require any AI requests.
+- `run`: Executes the Playwright scripts and output the screenshots. This does not require any AI requests.
 
 
 ## Quick start
