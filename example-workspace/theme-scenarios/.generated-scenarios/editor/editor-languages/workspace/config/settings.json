@@ -1,0 +1,82 @@
+{
+  "application": {
+    "name": "DataViz Platform",
+    "version": "2.1.0",
+    "environment": "production",
+    "debug": false
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "ssl": {
+      "enabled": true,
+      "certificate": "/etc/ssl/certs/app.crt",
+      "privateKey": "/etc/ssl/private/app.key"
+    },
+    "cors": {
+      "enabled": true,
+      "origins": [
+        "https://app.example.com",
+        "https://admin.example.com"
+      ],
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "credentials": true
+    }
+  },
+  "database": {
+    "primary": {
+      "type": "postgresql",
+      "host": "db.example.com",
+      "port": 5432,
+      "database": "dataviz_prod",
+      "username": "app_user",
+      "poolSize": 20,
+      "ssl": true
+    },
+    "redis": {
+      "host": "cache.example.com",
+      "port": 6379,
+      "database": 0,
+      "keyPrefix": "dvp:",
+      "ttl": 3600
+    }
+  },
+  "features": {
+    "analytics": true,
+    "realTimeUpdates": true,
+    "advancedFiltering": true,
+    "exportFormats": ["pdf", "excel", "csv"],
+    "userPermissions": {
+      "roles": ["admin", "editor", "viewer"],
+      "defaultRole": "viewer"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "outputs": [
+      {
+        "type": "file",
+        "path": "/var/log/dataviz/app.log",
+        "maxSize": "100MB",
+        "maxFiles": 5
+      },
+      {
+        "type": "console",
+        "colorize": true
+      }
+    ]
+  },
+  "monitoring": {
+    "healthCheck": {
+      "enabled": true,
+      "endpoint": "/health",
+      "interval": 30
+    },
+    "metrics": {
+      "enabled": true,
+      "endpoint": "/metrics",
+      "prometheus": true
+    }
+  }
+}

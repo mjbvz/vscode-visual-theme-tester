@@ -1,7 +1,6 @@
 node_modules/
 output/
 theme-scenario-results/
-.generated-scenarios/
 
 # Local environment variables
 .env

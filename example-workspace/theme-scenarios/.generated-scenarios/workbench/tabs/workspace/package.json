@@ -1,0 +1,19 @@
+{
+  "name": "tab-demo",
+  "version": "1.0.0",
+  "description": "Demo project for tab scenarios",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.0",
+    "@types/node": "^18.0.0"
+  }
+}
