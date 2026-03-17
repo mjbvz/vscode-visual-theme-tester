@@ -16,17 +16,20 @@ The main source code this this project lives in `src` and is written in TypeScri
 
 ## Scenario scripts
 
-Scripts are plain `.mjs` files you can inspect and hand-edit:
+Each scenario has the following structure:
+
+```
+workspace/ # The VS Code workspace to run the scenario in
+   ...
+scenario.mjs # Script that runs the scenario.
+```
+
+Scenario scripts are plain `.mjs` files you can inspect and hand-edit:
 
 ```js
 // Auto-generated scenario code
 // Source: scenarios/editor-overview.prompt.md
 // prompt-hash: a1b2c3d4e5f6
-
-export const files = {
-  "src/app.ts": `import express from 'express';
-const app = express();`,
-};
 
 export default async function(helpers) {
   await helpers.openFile('src/app.ts');
@@ -34,6 +37,8 @@ export default async function(helpers) {
   await helpers.saveScreenshot('Editor showing app.ts');
 }
 ```
+
+Each file has a default export function that takes a `helpers` object.
 
 ### Helpers API
 
