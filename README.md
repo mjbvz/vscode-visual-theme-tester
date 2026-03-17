@@ -13,14 +13,19 @@ With this tool, you:
 
 ## Quick start
 
-Requires Node 22+. You'll need an [Anthropic API key](https://console.anthropic.com/) for the `generate` step.
+Pre-reqs:
+
+- Node 22+
+- [Anthropic API key](https://console.anthropic.com/) for the `generate` step.
+
+To install dependencies:
 
 ```sh
 npm install
 npx playwright install chromium
 ```
 
-After setup, then run `generate` to create the scripts. By default this looks for `*.prompt.md` files in a folder called `theme-scenarios`:
+After install, use the `generate` command to create the scenario scripts. By default, `generate` looks for `*.prompt.md` files in a folder you pass in (`./theme-scenarios` in this example, which is also the default):
 
 ```sh
 # You can pass your ANTHROPIC_API_KEY on the command line
@@ -30,12 +35,12 @@ ANTHROPIC_API_KEY=sk-ant-... node src/cli.ts generate ./theme-scenarios
 node --env-file=.env src/cli.ts generate ./theme-scenarios
 ```
 
-The generated `scenarios` are written to a folder called `.generated-scenarios`.
+The generated `scenarios` are written to a folder called `.generated-scenarios` inside of the passed in folder.
 
-Then to execute the generated scenarios:
+You can then execute the generated scenarios using the `run`:
 
 ```sh
-node src/cli.ts run --themes "My Theme Dark, My Theme Light" --extension ./path-to-my-theme-ext
+node src/cli.ts run ./theme-scenarios --themes "My Theme Dark, My Theme Light" --extension ./path-to-my-theme-ext
 ```
 
 The screenshots are saved to `theme-scenario-results/<scenario>/<theme>/` by default.
