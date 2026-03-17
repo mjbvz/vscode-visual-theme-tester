@@ -1,0 +1,14 @@
+{
+  "name": "activity-bar-demo",
+  "version": "1.0.0",
+  "description": "Demo workspace for activity bar badges",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^18.0.0"
+  }
+}

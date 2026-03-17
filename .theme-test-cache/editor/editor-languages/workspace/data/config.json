@@ -1,0 +1,320 @@
+{
+  "application": {
+    "name": "Modern Web Application",
+    "version": "2.1.0",
+    "description": "A comprehensive full-stack application with real-time features",
+    "author": {
+      "name": "Development Team",
+      "email": "dev@company.com",
+      "website": "https://company.com"
+    },
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/company/modern-web-app.git"
+    }
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "environment": "production",
+    "cors": {
+      "enabled": true,
+      "origins": ["https://app.company.com", "https://admin.company.com"],
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "allowCredentials": true,
+      "maxAge": 86400
+    },
+    "rateLimit": {
+      "windowMs": 900000,
+      "maxRequests": 100,
+      "message": "Too many requests, please try again later",
+      "skipSuccessfulRequests": true
+    },
+    "compression": {
+      "enabled": true,
+      "threshold": 1024,
+      "level": 6
+    }
+  },
+  "database": {
+    "type": "postgresql",
+    "host": "localhost",
+    "port": 5432,
+    "name": "webapp_production",
+    "username": "webapp_user",
+    "ssl": {
+      "enabled": true,
+      "rejectUnauthorized": true,
+      "ca": "/etc/ssl/certs/ca-certificates.crt"
+    },
+    "pool": {
+      "min": 5,
+      "max": 20,
+      "acquireTimeoutMillis": 30000,
+      "idleTimeoutMillis": 600000
+    },
+    "migrations": {
+      "directory": "./migrations",
+      "tableName": "knex_migrations",
+      "extension": "ts"
+    }
+  },
+  "redis": {
+    "host": "redis.company.internal",
+    "port": 6379,
+    "password": "${REDIS_PASSWORD}",
+    "db": 0,
+    "keyPrefix": "webapp:",
+    "retryDelayOnFailover": 100,
+    "enableReadyCheck": true,
+    "maxRetriesPerRequest": 3,
+    "family": 4
+  },
+  "authentication": {
+    "jwt": {
+      "secret": "${JWT_SECRET}",
+      "algorithm": "HS256",
+      "expiresIn": "7d",
+      "refreshTokenExpiry": "30d",
+      "issuer": "webapp-api",
+      "audience": "webapp-client"
+    },
+    "oauth": {
+      "google": {
+        "clientId": "${GOOGLE_CLIENT_ID}",
+        "clientSecret": "${GOOGLE_CLIENT_SECRET}",
+        "scope": ["profile", "email"],
+        "callbackURL": "/auth/google/callback"
+      },
+      "github": {
+        "clientId": "${GITHUB_CLIENT_ID}",
+        "clientSecret": "${GITHUB_CLIENT_SECRET}",
+        "scope": ["user:email"],
+        "callbackURL": "/auth/github/callback"
+      }
+    },
+    "session": {
+      "secret": "${SESSION_SECRET}",
+      "name": "webapp.sid",
+      "resave": false,
+      "saveUninitialized": false,
+      "cookie": {
+        "secure": true,
+        "httpOnly": true,
+        "maxAge": 3600000,
+        "sameSite": "strict"
+      }
+    }
+  },
+  "email": {
+    "provider": "sendgrid",
+    "apiKey": "${SENDGRID_API_KEY}",
+    "fromAddress": "noreply@company.com",
+    "fromName": "Company Team",
+    "templates": {
+      "welcome": "d-1234567890abcdef",
+      "passwordReset": "d-fedcba0987654321",
+      "emailVerification": "d-abcd1234efgh5678"
+    },
+    "webhooks": {
+      "enabled": true,
+      "endpoint": "/webhooks/email",
+      "verificationKey": "${SENDGRID_WEBHOOK_KEY}"
+    }
+  },
+  "storage": {
+    "provider": "aws-s3",
+    "aws": {
+      "region": "us-east-1",
+      "bucket": "webapp-uploads-production",
+      "accessKeyId": "${AWS_ACCESS_KEY_ID}",
+      "secretAccessKey": "${AWS_SECRET_ACCESS_KEY}",
+      "cloudFront": {
+        "enabled": true,
+        "domain": "cdn.company.com",
+        "ttl": 31536000
+      }
+    },
+    "uploadLimits": {
+      "maxFileSize": 52428800,
+      "maxFiles": 10,
+      "allowedTypes": [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "image/svg+xml",
+        "application/pdf",
+        "text/csv",
+        "application/vnd.ms-excel"
+      ]
+    }
+  },
+  "monitoring": {
+    "sentry": {
+      "dsn": "${SENTRY_DSN}",
+      "environment": "production",
+      "release": "webapp@2.1.0",
+      "tracesSampleRate": 0.1,
+      "profilesSampleRate": 0.1
+    },
+    "prometheus": {
+      "enabled": true,
+      "port": 9090,
+      "path": "/metrics",
+      "collectDefaultMetrics": true,
+      "requestDurationBuckets": [0.1, 0.3, 0.5, 0.7, 1, 3, 5, 7, 10]
+    },
+    "healthChecks": {
+      "enabled": true,
+      "interval": 30000,
+      "checks": {
+        "database": {
+          "enabled": true,
+          "timeout": 5000,
+          "query": "SELECT 1"
+        },
+        "redis": {
+          "enabled": true,
+          "timeout": 2000
+        },
+        "external": {
+          "enabled": true,
+          "endpoints": [
+            "https://api.company.com/health",
+            "https://payments.company.com/status"
+          ],
+          "timeout": 10000
+        }
+      }
+    }
+  },
+  "features": {
+    "realTimeUpdates": {
+      "enabled": true,
+      "websocket": {
+        "pingInterval": 25000,
+        "pingTimeout": 5000,
+        "maxConnections": 1000,
+        "transports": ["websocket", "polling"]
+      }
+    },
+    "analytics": {
+      "enabled": true,
+      "providers": {
+        "googleAnalytics": {
+          "trackingId": "GA_TRACKING_ID",
+          "enhanced": true
+        },
+        "mixpanel": {
+          "token": "${MIXPANEL_TOKEN}",
+          "enabled": true
+        }
+      },
+      "eventTracking": {
+        "pageViews": true,
+        "userActions": true,
+        "customEvents": true,
+        "performanceMetrics": true
+      }
+    },
+    "caching": {
+      "enabled": true,
+      "strategies": {
+        "static": {
+          "ttl": 31536000,
+          "headers": {
+            "Cache-Control": "public, max-age=31536000, immutable"
+          }
+        },
+        "api": {
+          "ttl": 300,
+          "headers": {
+            "Cache-Control": "public, max-age=300, must-revalidate"
+          }
+        },
+        "user": {
+          "ttl": 60,
+          "headers": {
+            "Cache-Control": "private, max-age=60"
+          }
+        }
+      }
+    },
+    "backup": {
+      "enabled": true,
+      "schedule": "0 2 * * *",
+      "retention": {
+        "daily": 7,
+        "weekly": 4,
+        "monthly": 12
+      },
+      "destinations": {
+        "s3": {
+          "bucket": "webapp-backups",
+          "encryption": true
+        },
+        "local": {
+          "path": "/backups",
+          "enabled": false
+        }
+      }
+    }
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "outputs": {
+      "console": {
+        "enabled": true,
+        "colorize": true
+      },
+      "file": {
+        "enabled": true,
+        "path": "/var/log/webapp/app.log",
+        "maxSize": "100m",
+        "maxFiles": 10,
+        "compress": true
+      },
+      "elasticsearch": {
+        "enabled": true,
+        "host": "elasticsearch.company.internal:9200",
+        "index": "webapp-logs",
+        "auth": {
+          "username": "${ELASTICSEARCH_USER}",
+          "password": "${ELASTICSEARCH_PASSWORD}"
+        }
+      }
+    },
+    "sanitize": {
+      "enabled": true,
+      "fields": ["password", "token", "secret", "authorization"]
+    }
+  },
+  "security": {
+    "helmet": {
+      "contentSecurityPolicy": {
+        "directives": {
+          "defaultSrc": ["'self'"],
+          "styleSrc": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+          "fontSrc": ["'self'", "https://fonts.gstatic.com"],
+          "imgSrc": ["'self'", "data:", "https://cdn.company.com"],
+          "scriptSrc": ["'self'", "https://cdn.company.com"],
+          "connectSrc": ["'self'", "wss://app.company.com"]
+        }
+      },
+      "hsts": {
+        "maxAge": 31536000,
+        "includeSubDomains": true,
+        "preload": true
+      }
+    },
+    "encryption": {
+      "algorithm": "aes-256-gcm",
+      "keyRotation": {
+        "enabled": true,
+        "interval": "90d"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+	"name": "vscode-visual-theme-tester",
+	"private": true,
+	"version": "0.1.0",
+	"description": "CLI tool for testing VS Code themes by using automation to capture in-product screenshots",
+	"license": "MIT",
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.39.0",
+		"commander": "^13.1.0",
+		"glob": "^11.0.1",
+		"playwright": "^1.58.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.13.0",
+		"typescript": "^5.8.0"
+	},
+	"scripts": {
+		"typecheck": "tsc"
+	}
+}

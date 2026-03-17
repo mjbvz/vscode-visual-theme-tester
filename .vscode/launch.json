@@ -1,0 +1,20 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug example scenario",
+			"type": "node",
+			"request": "launch",
+			"args": [
+				"src/cli.ts",
+				"run",
+				"--cwd=${workspaceFolder}/example-workspace",
+				"--extension=./test-theme-ext",
+				"--themes=Default Dark Modern",
+				"--grep=terminal"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal"
+		}
+	]
+}

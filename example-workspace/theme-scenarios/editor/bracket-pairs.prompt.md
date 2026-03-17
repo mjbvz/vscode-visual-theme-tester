@@ -1,0 +1,1 @@
+Open a TypeScript file with deeply nested brackets, parentheses, and braces (3–4 levels deep). The file should have functions with nested callbacks, object literals inside arrays, and conditional chains so bracket pair colorization is clearly visible. Take a screenshot showing the editor with colorized bracket pairs and bracket pair guides.

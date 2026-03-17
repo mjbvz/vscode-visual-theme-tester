@@ -1,0 +1,54 @@
+{
+  "development": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "express_app_dev",
+    "username": "developer",
+    "password": "dev_password",
+    "dialect": "postgresql",
+    "logging": true,
+    "pool": {
+      "max": 10,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
+  },
+  "test": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "express_app_test",
+    "username": "test_user",
+    "password": "test_password",
+    "dialect": "postgresql",
+    "logging": false,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
+  },
+  "production": {
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
+    "database": "${DB_NAME}",
+    "username": "${DB_USER}",
+    "password": "${DB_PASSWORD}",
+    "dialect": "postgresql",
+    "logging": false,
+    "ssl": true,
+    "pool": {
+      "max": 20,
+      "min": 5,
+      "acquire": 30000,
+      "idle": 10000
+    },
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Open a TypeScript file so the editor isn't empty. Then open the Search sidebar by running "View: Show Search". Type a search term that will match content in the workspace files. Wait for search results to appear. Take a screenshot showing the search sidebar with results.

@@ -1,0 +1,11 @@
+{
+  "name": "My Application",
+  "version": "1.0.0",
+  "environment": "development",
+  "port": 3000,
+  "logLevel": "info",
+  "features": {
+    "authentication": true,
+    "analytics": false
+  }
+}
