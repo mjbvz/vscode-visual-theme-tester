@@ -65,7 +65,7 @@ node src/cli.ts run --cwd ./example-workspace \
 
 ## Writing scenarios
 
-Scenarios are written in `*.prompt.md` files in the `theme-scenarios/` folder. They are natural-language instructions describing what VS Code UI state to set up. You can then say "take a screenshot" wherever you want a capture the UI in its current state.
+Scenarios are written in `*.prompt.md` files. They are natural-language instructions describing what VS Code UI state to set up. You can then say "take a screenshot" wherever you want a capture the UI in its current state.
 
 Here's a simple example:
 
